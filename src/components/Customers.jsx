@@ -7,7 +7,7 @@ import { fetchData } from "../redux/slice/getDataSlice";
 import { addFavorites } from "../redux/slice/favoritesCustomerSlice";
 
 const Customers = () => {
-  const favCustomer = useSelector((state) => state.favCustomer.favorites);
+  const favCustomer = useSelector((state) => state.favCustomer.favosites);
   console.log(favCustomer);
   const customers = useSelector((state) => state.customers.data);
   console.log(customers);
@@ -19,6 +19,7 @@ const Customers = () => {
   }, []);
 
   const handleAddToFav = (customer) => {
+    console.log(customer);
     dispatch(addFavorites(customer));
 
   };

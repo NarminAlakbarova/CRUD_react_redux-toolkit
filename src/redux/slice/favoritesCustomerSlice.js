@@ -9,13 +9,13 @@ export const favositesCustomerSlice = createSlice({
   initialState,
   reducers: {
     addFavorites: (state, action) => {
-      [...state.favosites, action.payload];
+    state.favosites=  [...state.favosites, action.payload];
     },
     removeFavorites: (state, action) => {
-      [...state.favosites.filter((el) => el.id !== action.payload)];
+    state.favosites=  [...state.favosites.filter((el) => el.id !== action.payload)];
     },
     removeAllFavorites: (state) => {
-      [];
+     state.favosites= [];
     },
   },
 });

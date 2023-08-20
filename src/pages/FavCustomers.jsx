@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 const FavCustomers = () => {
   const favCustomer = useSelector((state) => state.favCustomer.favosites);
   const dispatch = useDispatch();
-
+console.log(favCustomer);
 
 
 
