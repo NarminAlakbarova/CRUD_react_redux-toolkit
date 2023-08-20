@@ -4,7 +4,7 @@ import { BsFillTrashFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 
 const FavCustomers = () => {
-  const favCustomer = useSelector((state) => state.favorites.favosites);
+  const favCustomer = useSelector((state) => state.favCustomer.favosites);
   const dispatch = useDispatch();
 
 

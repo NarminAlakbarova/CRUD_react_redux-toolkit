@@ -19,14 +19,8 @@ const Customers = () => {
   }, []);
 
   const handleAddToFav = (customer) => {
-    const isAlreadyFav = favCustomer.find((fav) => fav.id === customer.id);
+    dispatch(addFavorites(customer));
 
-    if (!isAlreadyFav) {
-      dispatch(addFavorites(customer));
-
-    } else {
-      window.alert("Bu müşteri zaten favorilerinizde!");
-    }
   };
 
   let columns = [
