@@ -1,14 +1,22 @@
-import {Button, Table } from "antd";
+import { Button, Table } from "antd";
 import React from "react";
 import { BsFillTrashFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
+import {
+  removeAllFavorites,
+  removeFavorites,
+} from "../redux/slice/favoritesCustomerSlice";
 
 const FavCustomers = () => {
-  const favCustomer = useSelector((state) => state.favCustomer.favosites);
+  const favCustomer = useSelector((state) => state.favCustomer.favorites);
   const dispatch = useDispatch();
-console.log(favCustomer);
 
-
+  const handleDeleteFavCustomer = (id) => {
+    dispatch(removeFavorites(id));
+  };
+  const handleRemoveAllFavorites = () => {
+    dispatch(removeAllFavorites());
+  };
 
   let columns = [
     {
@@ -31,14 +39,19 @@ console.log(favCustomer);
     },
     {
       title: "Action",
-      render: () => (
-        <Button danger>
+      render: (obj) => (
+        <Button danger onClick={() => handleDeleteFavCustomer(obj.id)}>
           <BsFillTrashFill />
         </Button>
       ),
     },
   ];
-  return <Table columns={columns} rowKey={"id"} dataSource={favCustomer} />;
+  return (
+    <>
+      <Button onClick={handleRemoveAllFavorites}>Remove All</Button>{" "}
+      <Table columns={columns} rowKey={"id"} dataSource={favCustomer} />;
+    </>
+  );
 };
 
 export default FavCustomers;

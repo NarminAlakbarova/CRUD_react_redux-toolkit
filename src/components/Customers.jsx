@@ -5,23 +5,24 @@ import { AiFillEdit } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchData } from "../redux/slice/getDataSlice";
 import { addFavorites } from "../redux/slice/favoritesCustomerSlice";
+import { editCustomer } from "../redux/slice/editCustomerSlice";
+import { Link } from "react-router-dom";
 
 const Customers = () => {
-  const favCustomer = useSelector((state) => state.favCustomer.favosites);
-  console.log(favCustomer);
+  const favCustomer = useSelector((state) => state.favCustomer.favorites);
   const customers = useSelector((state) => state.customers.data);
-  console.log(customers);
   const dispatch = useDispatch();
-  console.log(customers);
 
   useEffect(() => {
     dispatch(fetchData());
   }, []);
 
   const handleAddToFav = (customer) => {
-    console.log(customer);
-    dispatch(addFavorites(customer));
-
+    if (!favCustomer.find((item) => item.id === customer.id)) {
+      dispatch(addFavorites(customer));
+    } else {
+      window.alert("Alredy added favorites!");
+    }
   };
 
   let columns = [
@@ -41,18 +42,22 @@ const Customers = () => {
     {
       title: "Phone",
       dataIndex: "address",
-      render: (el) => `${el.phone}`,
+      render: (el) => el?.phone,
     },
+
     {
       title: "Action",
       render: (obj) => (
         <div>
-          <Button danger onClick={()=>handleAddToFav(obj)}>
+          <Button danger onClick={() => handleAddToFav(obj)}>
             <AiOutlineHeart />
           </Button>
-          <Button>
+          <Link
+            to={`/form`}
+            onClick={() => dispatch(editCustomer({ data: obj, id: obj.id }))}
+          >
             <AiFillEdit />
-          </Button>
+          </Link>
         </div>
       ),
     },
